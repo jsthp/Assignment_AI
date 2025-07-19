@@ -1,3 +1,4 @@
+#JS
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -12,7 +13,7 @@ import numpy as np # Importing numpy for the confusion matrix labeling
 # 1. Load and preprocess data
 df = pd.read_csv(r"C:\Users\Jashmina\Downloads\Telco-Customer-Churn.csv")
 
-# Defines the 9 key features as per your updated methodology, including 'Churn'
+# Defines the 9 key features as per the updated methodology, including 'Churn'
 # These are the ORIGINAL column names before any encoding.
 selected_original_features = [
     'gender', 'SeniorCitizen', 'Partner', 'tenure', 'MonthlyCharges',
@@ -21,7 +22,7 @@ selected_original_features = [
 
 # This shows the raw data as loaded, before any major changes or feature selection.
 print("--- Initial Data (Head) ---")
-print(df[selected_original_features].head()) # Show head of only the *selected* features for clarity
+print(df[selected_original_features].head()) # Shows head of only the *selected* features for clarity
 print("\n--- Initial Data (Info for Selected Features) ---")
 print(df[selected_original_features].info()) # Info for only the *selected* features
 print("\n--- Initial Data (Missing Values for Selected Features) ---")
@@ -73,10 +74,10 @@ y = df['Churn']
 X_train, X_temp, y_train, y_temp = train_test_split(X,y, test_size=0.3, stratify=y, random_state=42)
 X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, stratify=y_temp, random_state=42)
 
-# --- NEWLY ADDED: Visualize Class Distribution BEFORE and AFTER SMOTE ---
-# This part is for generating the plots for your report
+#Visualizes Class Distribution BEFORE and AFTER SMOTE ---
+# This part is for generating the plots for the report
 print("\n--- Generating Class Distribution Plots ---")
-# Visualize Class Distribution BEFORE SMOTE
+# Visualizes Class Distribution BEFORE SMOTE
 plt.figure(figsize=(6, 5))
 sns.countplot(x=y_train)
 plt.title('Class Distribution Before SMOTE')
@@ -85,11 +86,11 @@ plt.ylabel('Number of Samples')
 plt.savefig('class_distribution_before_smote.png') # Save the plot
 plt.show()
 
-# Apply SMOTE for Visualization Purposes (temporarily outside pipeline to get resampled y)
+# Applies SMOTE for Visualization Purposes (temporarily outside pipeline to get resampled y)
 smote_visual = SMOTE(random_state=42)
 X_train_resampled, y_train_resampled = smote_visual.fit_resample(X_train, y_train)
 
-# Visualize Class Distribution AFTER SMOTE
+# Visualizes Class Distribution AFTER SMOTE
 plt.figure(figsize=(6, 5))
 sns.countplot(x=y_train_resampled)
 plt.title('Class Distribution After SMOTE')
@@ -98,12 +99,11 @@ plt.ylabel('Number of Samples')
 plt.savefig('class_distribution_after_smote.png') # Save the plot
 plt.show()
 
-# Optional: Print counts to verify
+# Optional: Prints counts to verify
 print("\nClass distribution before SMOTE:")
 print(y_train.value_counts())
 print("\nClass distribution after SMOTE:")
 print(y_train_resampled.value_counts())
-# --- END NEWLY ADDED CODE ---
 
 
 # 2. Baseline Logistic Regression model (no SMOTE)
@@ -220,3 +220,15 @@ y_prob_test = grid_lr.predict_proba(X_test)[:, 1]
 print(classification_report(y_test, y_pred_test))
 plot_confusion_matrix(y_test, y_pred_test, "Confusion Matrix - LR with SMOTE (Test Set)", "confusion_lr_smote_test.png")
 plot_roc_comparison(y_test, lr_base.predict_proba(X_test)[:,1], 'Baseline (Test)', y_prob_test, 'SMOTE (Test)', 'ROC Curve - LR Test Set Performance', 'roc_lr_test.png')
+
+
+
+
+
+
+
+
+
+
+
+
